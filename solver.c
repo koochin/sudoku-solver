@@ -32,6 +32,7 @@ backtrack(char board[9][10], uint8_t i)
         if (USED(v, row[r], col[c], box[b])) {
             continue;
         }
+        char ch = board[r][c];
         board[r][c] = '1'+v;
         row[r] |= 1 << v;
         col[c] |= 1 << v;
@@ -39,6 +40,7 @@ backtrack(char board[9][10], uint8_t i)
         if (backtrack(board, i+1)) {
             return 1;
         }
+        board[r][c] = ch;
         row[r] ^= 1 << v;
         col[c] ^= 1 << v;
         box[b] ^= 1 << v;
